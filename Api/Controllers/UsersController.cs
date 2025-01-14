@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.RequestModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
@@ -7,9 +8,9 @@ namespace Api.Controllers
     public class UsersController : ControllerBase
     {
         [HttpPut]
-        public IActionResult CreateUser()
+        public IActionResult CreateUser(CreateUserRequest user)
         {
-            return Ok();
+            return Ok(user);
         }
     }
 }
