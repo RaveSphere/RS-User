@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
 
-namespace Application.Services
+namespace Sql.Repositories
 {
     public class UserSqlRepository : IUserSqlRepository
     {

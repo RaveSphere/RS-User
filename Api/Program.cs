@@ -1,5 +1,6 @@
 using Application.Interfaces;
 using Application.Services;
+using Sql.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
