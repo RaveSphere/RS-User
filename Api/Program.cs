@@ -1,6 +1,5 @@
-using Application.Interfaces;
-using Application.Services;
-using Sql.Repositories;
+using Application;
+using Sql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add DI
-builder.Services.AddScoped<IUserSqlRepository, UserSqlRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
+// Add Services
+builder.Services
+    .AddUserServiceDb(builder.Configuration["ConnectionStrings:UserServiceDb"]!)
+    .AddApplicationServices();
+
 
 var app = builder.Build();
 
@@ -23,6 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ApplyMigration();
 
 app.UseHttpsRedirection();
 
