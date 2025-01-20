@@ -3,9 +3,9 @@ using Core.Models;
 
 namespace Api.Mappers
 {
-    public class UserMapper
+    internal class UserMapper
     {
-        public UserVM Map(User user)
+        public static UserVM Map(User user)
         {
             return new UserVM(user.Username);
         }

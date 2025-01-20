@@ -6,11 +6,7 @@ namespace Sql.Entities
     [Table("Users")]
     public class UserEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-
-        [MinLength(6), MaxLength(30)]
+        [MinLength(6), MaxLength(30), Key]
         public required string Username { get; set; }
 
         [MinLength(60), MaxLength(60)]

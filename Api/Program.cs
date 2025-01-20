@@ -1,4 +1,6 @@
+using Api.Validators;
 using Application;
+using FluentValidation;
 using Sql;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // Add Services
 builder.Services
     .AddUserServiceDb(builder.Configuration["ConnectionStrings:UserServiceDb"]!)
+    .AddValidatorsFromAssemblyContaining<UserRequestValidator>()
     .AddApplicationServices();
 
 
