@@ -3,18 +3,16 @@ using Core.Models;
 
 namespace Application.Services
 {
-    public class UserService(IUserSqlRepository userSqlRepository, IHashingService hashingService) : IUserService
+    public class UserService(IUserSqlRepository userSqlRepository) : IUserService
     {
-        public async Task<UserModel?> CreateUserAsync(string username, string password, CancellationToken cancellationToken)
+        public async Task<UserModel?> CreateUserAsync(string username, string hashedPassword, Guid salt, CancellationToken cancellationToken)
         {
             if (await userSqlRepository.GetUserAsync(username, cancellationToken) != null)
             {
                 return null;
             }
 
-            HashingModel hashingModel = await hashingService.Hash(password, Guid.NewGuid().ToByteArray());
-
-            UserModel user = new UserModel(username, hashingModel.HashedPassword, hashingModel.Salt);
+            UserModel user = new UserModel(username, hashedPassword, salt.ToByteArray());
             return await userSqlRepository.SaveUserAsync(user, cancellationToken);
         }
     }

@@ -9,8 +9,7 @@ namespace Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             return services
-                .AddScoped<IUserService, UserService>()
-                .AddScoped<IHashingService, HashingService>();
+                .AddScoped<IUserService, UserService>();
         }
     }
 }
