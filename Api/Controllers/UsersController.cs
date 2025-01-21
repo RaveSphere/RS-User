@@ -22,7 +22,7 @@ namespace Api.Controllers
                 return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage));
             }
 
-            User? user = await userService.CreateUserAsync(request.Username, request.Password, cancellationToken);
+            UserModel? user = await userService.CreateUserAsync(request.Username, request.Password, cancellationToken);
 
             if (user == null)
             {

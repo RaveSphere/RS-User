@@ -5,7 +5,7 @@ namespace Api.Mappers
 {
     internal class UserMapper
     {
-        public static UserVM Map(User user)
+        public static UserVM Map(UserModel user)
         {
             return new UserVM(user.Username);
         }

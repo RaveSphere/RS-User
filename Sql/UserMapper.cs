@@ -5,12 +5,12 @@ namespace Sql
 {
     internal class UserMapper
     {
-        public static User Map(UserEntity userEntity)
+        public static UserModel Map(UserEntity userEntity)
         {
-            return new User(userEntity.Username, userEntity.Password, userEntity.Salt);
+            return new UserModel(userEntity.Username, userEntity.Password, userEntity.Salt);
         }
 
-        public static UserEntity Map(User user)
+        public static UserEntity Map(UserModel user)
         {
             return new UserEntity
             {

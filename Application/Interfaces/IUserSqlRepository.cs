@@ -4,7 +4,7 @@ namespace Application.Interfaces
 {
     public interface IUserSqlRepository
     {
-        public Task<User?> SaveUserAsync(User user, CancellationToken cancellationToken);
-        public Task<User?> GetUserAsync(string username, CancellationToken cancellationToken);
+        public Task<UserModel?> SaveUserAsync(UserModel user, CancellationToken cancellationToken);
+        public Task<UserModel?> GetUserAsync(string username, CancellationToken cancellationToken);
     }
 }

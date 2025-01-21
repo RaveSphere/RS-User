@@ -4,6 +4,6 @@ namespace Application.Interfaces
 {
     public interface IUserService
     {
-        public Task<User?> CreateUserAsync(string username, string password, CancellationToken cancellationToken);
+        public Task<UserModel?> CreateUserAsync(string username, string password, CancellationToken cancellationToken);
     }
 }

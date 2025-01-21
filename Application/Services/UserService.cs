@@ -5,7 +5,7 @@ namespace Application.Services
 {
     public class UserService(IUserSqlRepository userSqlRepository, IHashingService hashingService) : IUserService
     {
-        public async Task<User?> CreateUserAsync(string username, string password, CancellationToken cancellationToken)
+        public async Task<UserModel?> CreateUserAsync(string username, string password, CancellationToken cancellationToken)
         {
             if (await userSqlRepository.GetUserAsync(username, cancellationToken) != null)
             {
@@ -14,7 +14,7 @@ namespace Application.Services
 
             HashingModel hashingModel = await hashingService.Hash(password, Guid.NewGuid().ToByteArray());
 
-            User user = new User(username, hashingModel.HashedPassword, hashingModel.Salt);
+            UserModel user = new UserModel(username, hashingModel.HashedPassword, hashingModel.Salt);
             return await userSqlRepository.SaveUserAsync(user, cancellationToken);
         }
     }
