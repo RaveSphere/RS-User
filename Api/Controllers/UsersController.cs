@@ -13,7 +13,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserRequest request, CancellationToken cancellationToken = default)
         {
-            UserModel? user = await userService.CreateUserAsync(request.Username, request.HasedPassword, request.Salt, cancellationToken);
+            UserModel? user = await userService.CreateUserAsync(request.Username, request.HashedPassword, request.Salt, cancellationToken);
 
             if (user == null)
             {

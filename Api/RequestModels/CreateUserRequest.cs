@@ -2,7 +2,7 @@
 {
     public record CreateUserRequest(
         string Username,
-        string HasedPassword,
+        string HashedPassword,
         Guid Salt
      );
 }
