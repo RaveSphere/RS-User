@@ -1,10 +1,10 @@
 ﻿namespace Api.ViewModels
 {
-    public class UserVM
+    public class GetUserVM
     {
         public string Username { get; set; }
 
-        public UserVM(string username)
+        public GetUserVM(string username)
         {
             Username = username;
         }

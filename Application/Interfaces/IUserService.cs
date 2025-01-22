@@ -4,6 +4,9 @@ namespace Application.Interfaces
 {
     public interface IUserService
     {
-        public Task<UserModel?> CreateUserAsync(string username, string hasedPassword, Guid salt, CancellationToken cancellationToken);
+        Task<CreateUserModel?> CreateUserAsync(string username, string hasedPassword, Guid salt, CancellationToken cancellationToken);
+        Task<GetUserModel?> GetUserAsync(string username, CancellationToken cancellationToken);
+        Task<GetUserSaltModel?> GetUserSaltAsync(string username, CancellationToken cancellationToken);
+        Task<GetUserModel?> ValidateCredentialsAsync(string username, string password, CancellationToken cancellationToken);
     }
 }
