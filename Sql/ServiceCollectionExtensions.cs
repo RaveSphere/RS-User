@@ -8,8 +8,11 @@ namespace Sql
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddUserServiceDb(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddUserServiceDb(this IServiceCollection services)
         {
+            var vaultService = services.BuildServiceProvider().GetRequiredService<IVaultService>();
+            string? connectionString = vaultService.GetSecretAsync("userService/connectionStrings", "UserServiceDb").Result;
+
             return services
                 .AddScoped<IUserSqlRepository, UserSqlRepository>()
                 .AddDbContext<UserDbContext>(options =>

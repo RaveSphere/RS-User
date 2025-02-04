@@ -1,4 +1,6 @@
 using Application;
+using Application.Interfaces;
+using Application.Services;
 using Sql;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,10 +12,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<IVaultService>(provider =>
+    new VaultService(
+        Environment.GetEnvironmentVariable("VAULT_ADDR"),
+        Environment.GetEnvironmentVariable("VAULT_ROLE"),
+        File.ReadAllText("/var/run/secrets/kubernetes.io/serviceaccount/token")
+    ));
+
 // Add Services
 builder.Services
-    .AddUserServiceDb(builder.Configuration["ConnectionStrings:UserServiceDb"]!)
+    .AddUserServiceDb()
     .AddApplicationServices();
+
 
 
 var app = builder.Build();
