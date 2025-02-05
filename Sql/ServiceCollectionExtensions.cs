@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sql.Contexts;
 using Sql.Repositories;
@@ -8,10 +9,19 @@ namespace Sql
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddUserServiceDb(this IServiceCollection services)
+        public static IServiceCollection AddUserServiceDb(this IServiceCollection services, IConfiguration configuration, string? environment)
         {
-            var vaultService = services.BuildServiceProvider().GetRequiredService<IVaultService>();
-            string? connectionString = vaultService.GetSecretAsync("userService/connectionStrings", "UserServiceDb").Result;
+            string? connectionString;
+
+            if (environment == "Production")
+            {
+                var vaultService = services.BuildServiceProvider().GetRequiredService<IVaultService>();
+                connectionString = vaultService.GetSecretAsync("userService/connectionStrings", "UserServiceDb").Result;
+            }
+            else
+            {
+                connectionString = configuration.GetConnectionString("UserServiceDb");
+            }
 
             return services
                 .AddScoped<IUserSqlRepository, UserSqlRepository>()

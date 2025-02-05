@@ -12,16 +12,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IVaultService>(provider =>
+string? environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+if (environment == "Production")
+{
+    builder.Services.AddSingleton<IVaultService>(provider =>
     new VaultService(
         Environment.GetEnvironmentVariable("VAULT_ADDR"),
         Environment.GetEnvironmentVariable("VAULT_ROLE"),
         File.ReadAllText("/var/run/secrets/kubernetes.io/serviceaccount/token")
     ));
+}
 
 // Add Services
 builder.Services
-    .AddUserServiceDb()
+    .AddUserServiceDb(builder.Configuration, environment)
     .AddApplicationServices();
 
 
