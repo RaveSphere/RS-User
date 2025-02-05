@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 string? environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+string? useSwagger = Environment.GetEnvironmentVariable("USESWAGGER");
 
 if (environment == "Production")
 {
@@ -34,7 +35,7 @@ builder.Services
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (useSwagger == "True")
 {
     app.UseSwagger();
     app.UseSwaggerUI();
