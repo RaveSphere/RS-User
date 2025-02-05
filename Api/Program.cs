@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 string? environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-string? useSwagger = Environment.GetEnvironmentVariable("USESWAGGER");
+string? useSwagger = Environment.GetEnvironmentVariable("USE_SWAGGER");
 
 if (environment == "Production")
 {
