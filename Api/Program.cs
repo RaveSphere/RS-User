@@ -26,11 +26,8 @@ if (environment == "Production")
 }
 
 // Add Services
-builder.Services
-    .AddUserServiceDb(builder.Configuration, environment)
-    .AddApplicationServices();
-
-
+await builder.Services.AddUserServiceDb(builder.Configuration, environment);
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

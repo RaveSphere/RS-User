@@ -9,14 +9,14 @@ namespace Sql
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddUserServiceDb(this IServiceCollection services, IConfiguration configuration, string? environment)
+        public async static Task<IServiceCollection> AddUserServiceDb(this IServiceCollection services, IConfiguration configuration, string? environment)
         {
             string? connectionString;
 
             if (environment == "Production")
             {
                 var vaultService = services.BuildServiceProvider().GetRequiredService<IVaultService>();
-                connectionString = vaultService.GetSecretAsync("userService/connectionStrings", "UserServiceDb").Result;
+                connectionString = await vaultService.GetSecretAsync("userService/connectionStrings", "UserServiceDb");
             }
             else
             {
