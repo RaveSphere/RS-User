@@ -10,7 +10,7 @@ namespace Api.Controllers
     [ApiController]
     public class UsersController(IUserService userService) : ControllerBase
     {
-        [HttpPost("create-user-TESTING")]
+        [HttpPost("create-user")]
         public async Task<IActionResult> CreateUser(CreateUserRequest request, CancellationToken cancellationToken = default)
         {
             CreateUserModel? user = await userService.CreateUserAsync(request.Username, request.Password, request.Salt, cancellationToken);
